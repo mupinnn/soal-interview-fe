@@ -1,5 +1,3 @@
-import { ok } from "assert";
-
 export interface GitHubUser {
   login: string;
   avatar_url: string;
@@ -60,15 +58,30 @@ export async function getGitHubUserRepos(
   return json.items.slice(0, 10);
 }
 
+type GitHubRepoDetailParams = {
+  username: string;
+  repo_name: string;
+};
+
 export async function getGitHubUserRepoDetail({
   username,
   repo_name,
-}: {
-  username: string;
-  repo_name: string;
-}): Promise<GitHubUserRepo> {
+}: GitHubRepoDetailParams): Promise<GitHubUserRepo> {
   const response = await fetch(
     `${githubApiBaseURL}/repos/${username}/${repo_name}`,
+  );
+
+  if (!response.ok) throw new Error(`Response status: ${response.status}`);
+
+  return response.json();
+}
+
+export async function getGitHubUserRepoLanguages({
+  username,
+  repo_name,
+}: GitHubRepoDetailParams): Promise<{ [k: string]: number }> {
+  const response = await fetch(
+    `${githubApiBaseURL}/repos/${username}/${repo_name}/languages`,
   );
 
   if (!response.ok) throw new Error(`Response status: ${response.status}`);
