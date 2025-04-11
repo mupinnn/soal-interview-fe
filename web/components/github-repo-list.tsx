@@ -1,23 +1,28 @@
-import { LuStar, LuGitFork, LuCircle } from "react-icons/lu";
+import { LuStar, LuGitFork } from "react-icons/lu";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { formatDate } from "@/utils";
-
-interface Repo {
-  id: number;
-  name: string;
-  description: string | null;
-  html_url: string;
-  stargazers_count: number;
-  forks_count: number;
-  language: string | null;
-  updated_at: string;
-}
+import { formatDate } from "@/lib/utils";
+import { getGitHubUserRepos } from "@/lib/github";
 
 interface RepoListProps {
-  repos: Repo[];
+  query: string;
 }
 
-export function RepoList({ repos }: RepoListProps) {
+export function GitHubRepoListSkeleton() {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      {[...Array(10).keys()].map((i) => (
+        <div
+          key={i}
+          className="rounded w-full h-80 bg-gray-100 animate-pulse"
+        ></div>
+      ))}
+    </div>
+  );
+}
+
+export async function GitHubRepoList({ query }: RepoListProps) {
+  const repos = await getGitHubUserRepos(query);
+
   if (repos.length === 0) {
     return <p className="text-center">No repositories found</p>;
   }
@@ -43,8 +48,8 @@ export function RepoList({ repos }: RepoListProps) {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-2xl font-bold">Top Repositories</h2>
-      <div className="grid grid-cols-1 gap-4">
+      <h2 className="text-2xl font-bold">Top 10 Repositories</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {repos.map((repo) => (
           <Card key={repo.id}>
             <CardHeader>
@@ -60,24 +65,30 @@ export function RepoList({ repos }: RepoListProps) {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              {repo.description && <p className="mb-4">{repo.description}</p>}
+              {repo.description && (
+                <p className="mb-4 wrap-break-word">{repo.description}</p>
+              )}
+
               <div className="flex flex-wrap items-center gap-4 text-sm">
                 {repo.language && (
                   <div className="flex items-center gap-1.5">
-                    <LuCircle
-                      className={`h-3 w-3 ${getLanguageColor(repo.language)}`}
+                    <div
+                      className={`size-3 rounded-full ${getLanguageColor(repo.language)}`}
                     />
                     <span>{repo.language}</span>
                   </div>
                 )}
+
                 <div className="flex items-center gap-1.5">
                   <LuStar className="h-4 w-4" />
                   <span>{repo.stargazers_count}</span>
                 </div>
+
                 <div className="flex items-center gap-1.5">
                   <LuGitFork className="h-4 w-4" />
                   <span>{repo.forks_count}</span>
                 </div>
+
                 <p>
                   Updated on {formatDate(repo.updated_at, { month: "short" })}
                 </p>

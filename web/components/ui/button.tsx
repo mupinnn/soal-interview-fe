@@ -1,9 +1,9 @@
 import React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 
 const buttonVariants = tv({
-  base: "inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors rounded border-2 text-slate-50",
+  base: "inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors rounded border-2 text-slate-50 disabled:opacity-70 disabled:cursor-not-allowed",
   variants: {
     size: {
       default: "h-10 px-4 py-2",

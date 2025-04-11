@@ -1,11 +1,11 @@
 import type React from "react";
 import { forwardRef } from "react";
 import { tv } from "tailwind-variants";
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 
 const cardVariants = tv({
   slots: {
-    base: "rounded-2 border border-indigo-900 shadow-[4px_4px_0_0_var(--color-indigo-900)]",
+    base: "rounded border-2 border-indigo-900 shadow-[4px_4px_0_0_var(--color-indigo-900)]",
     header: "flex flex-col space-y-1.5 p-6 pb-2",
     title: "text-xl font-semibold leading-none tracking-tight",
     description: "text-sm",
