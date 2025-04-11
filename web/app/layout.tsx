@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} antialiased scroll-smooth flex min-h-svh flex-col text-gray-950 bg-gray-100 dark:bg-gray-950 dark:text-gray-200`}
+        className={`${inter.variable} antialiased scroll-smooth flex min-h-svh flex-col bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50`}
       >
         <ThemeProvider>
           <Navbar />

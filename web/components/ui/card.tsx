@@ -5,7 +5,7 @@ import { cn } from "@/utils";
 
 const cardVariants = tv({
   slots: {
-    base: "rounded border border-gray-950 shadow-accent-light bg-gray-100 dark:border-gray-100 dark:shadow-accent-dark dark:bg-gray-950",
+    base: "rounded-2 border border-indigo-900 shadow-[4px_4px_0_0_var(--color-indigo-900)]",
     header: "flex flex-col space-y-1.5 p-6 pb-2",
     title: "text-xl font-semibold leading-none tracking-tight",
     description: "text-sm",

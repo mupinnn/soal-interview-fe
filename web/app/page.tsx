@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-4">
       <h1 className="font-extrabold text-3xl text-center md:text-4xl lg:text-5xl">
-        <span className="text-orange-500">Easily</span> inspect your GitHub
+        <span className="text-indigo-500">Easily</span> inspect your GitHub
         profile
       </h1>
       <p className="text-center">

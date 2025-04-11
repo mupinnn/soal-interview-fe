@@ -3,15 +3,20 @@ import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/utils";
 
 const buttonVariants = tv({
-  base: "inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors bg-gray-100 rounded border border-gray-950 shadow-accent-light dark:shadow-accent-dark dark:border-gray-100 dark:bg-gray-950",
+  base: "inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors rounded border-2 text-slate-50",
   variants: {
     size: {
       default: "h-10 px-4 py-2",
       icon: "size-10",
     },
+    variant: {
+      primary:
+        "bg-indigo-700 border-indigo-900 shadow-[4px_4px_0_0_var(--color-indigo-900)]",
+    },
   },
   defaultVariants: {
     size: "default",
+    variant: "primary",
   },
 });
 

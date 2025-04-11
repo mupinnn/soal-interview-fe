@@ -4,7 +4,4 @@
 
 @theme inline {
   --font-sans: var(--font-inter, "Inter");
-
-  --shadow-accent-light: 2px 2px 0 0 var(--color-gray-950);
-  --shadow-accent-dark: 2px 2px 0 0 var(--color-gray-100);
 }
