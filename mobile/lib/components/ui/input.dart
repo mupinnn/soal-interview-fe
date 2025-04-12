@@ -4,12 +4,14 @@ class InputField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final bool enabled;
+  final Function(String)? onSubmitted;
 
   const InputField({
     super.key,
     required this.controller,
     this.hintText = '',
     this.enabled = true,
+    this.onSubmitted,
   });
 
   @override
@@ -27,6 +29,7 @@ class InputField extends StatelessWidget {
         ],
       ),
       child: TextField(
+        onSubmitted: onSubmitted,
         controller: controller,
         enabled: enabled,
         style: const TextStyle(fontSize: 14),

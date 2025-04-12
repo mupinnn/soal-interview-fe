@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import "package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart";
+import "package:mobile/lib/github.dart";
 import 'github_repo_card.dart';
 
 class GitHubRepoList extends StatelessWidget {

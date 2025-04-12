@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import "package:mobile/lib/utils.dart";
+import "package:mobile/lib/github.dart";
 
 class GitHubRepoCard extends StatelessWidget {
   final GitHubUserRepo repo;
@@ -76,24 +77,4 @@ class GitHubRepoCard extends StatelessWidget {
       ),
     );
   }
-}
-
-class GitHubUserRepo {
-  final String id;
-  final String name;
-  final String? description;
-  final String? language;
-  final int stargazersCount;
-  final int forksCount;
-  final String updatedAt;
-
-  GitHubUserRepo({
-    required this.id,
-    required this.name,
-    this.description,
-    this.language,
-    required this.stargazersCount,
-    required this.forksCount,
-    required this.updatedAt,
-  });
 }

@@ -1,10 +1,18 @@
 import "package:flutter/material.dart";
 import "package:mobile/components/ui/input.dart";
 import "package:mobile/components/github_profile_card.dart";
-import "package:mobile/components/github_repo_card.dart";
 import "package:mobile/components/github_repo_list.dart";
+import "package:mobile/lib/github.dart";
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  Future<GitHubUserProfile>? futureProfile;
+  Future<List<GitHubUserRepo>>? futureRepos;
+
   @override
   Widget build(BuildContext context) {
     final usernameController = TextEditingController();
@@ -43,17 +51,25 @@ class HomeScreen extends StatelessWidget {
             InputField(
               hintText: "Search your GitHub username . . .",
               controller: usernameController,
+              onSubmitted: (v) {
+                setState(() {
+                  futureProfile = getGitHubUser(v);
+                  futureRepos = getGitHubUserRepos(v);
+                });
+              },
             ),
             SizedBox(height: 16),
             Expanded(
-              child: ListView(
-                children: [
-                  GitHubProfileCard(profile: dummyProfile),
+              child: ListView(children: [
+                if (futureProfile != null)
+                  GitHubProfileCard(
+                    profileFuture: Future.value(futureProfile),
+                  ),
+                if (futureProfile != null)
                   GitHubRepoList(
-                    reposFuture: Future.value(dummyRepos),
+                    reposFuture: Future.value(futureRepos),
                   )
-                ],
-              ),
+              ]),
             )
           ],
         ),
@@ -61,26 +77,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-final dummyProfile = GitHubUserProfile(
-  login: 'octocat',
-  avatarUrl: 'https://github.com/images/error/octocat_happy.gif',
-  name: 'The Octocat',
-  bio: 'GitHub mascot',
-  followers: 100,
-  following: 10,
-  publicRepos: 50,
-);
-
-final dummyRepos = List.generate(
-  10,
-  (index) => GitHubUserRepo(
-    id: 'repo_$index',
-    name: 'Repo $index',
-    description: 'Description for repo $index',
-    language: 'Dart',
-    stargazersCount: index * 10,
-    forksCount: index,
-    updatedAt: '2025-04-11',
-  ),
-);

@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:intl/intl.dart";
 
 Color getLanguageColor(String language) {
   var colors = {
@@ -20,5 +21,5 @@ Color getLanguageColor(String language) {
 }
 
 String formatDate(String date) {
-  return date;
+  return DateFormat.yMMMd().format(DateTime.parse(date));
 }
